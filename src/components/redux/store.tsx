@@ -1,8 +1,9 @@
-import { rootReducer } from "./rootReducer";
-import { configureStore,  } from "@reduxjs/toolkit";
+import { postReducer } from "./postReducer";
+import { configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 
 
 export const store = configureStore({
-    reducer: { rootReducer },
-    devTools: process.env.NODE_ENV !== 'production',
+    reducer: {postReducer},
+    middleware: [thunk],
 });

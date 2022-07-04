@@ -1,3 +1,14 @@
 .sectionMain {
 	min-height: calc(100vh - 200px);
 }
+
+
+.btn {
+	display: inline-block;
+	background: transparent;
+	padding: 5px 15px;
+	color: #fff;
+	border: 1px solid #fff;
+	margin-bottom: 15px;
+	cursor: pointer;
+}

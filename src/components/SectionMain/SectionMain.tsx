@@ -5,6 +5,9 @@ import Spinner from "../Spiner/Spiner";
 import { useObserver } from "../hooks/useObserver";
 import State from "../state/state";
 
+import { useSelector , useDispatch} from "react-redux";
+import {fetchPost} from '../redux/action-creater';
+
 const SectionMain:React.FC = () => {
 		const state = new State();
 		const lastElement =  React.createRef<HTMLDivElement>();
@@ -21,9 +24,7 @@ const SectionMain:React.FC = () => {
 					return setPosts(newArr);
 				}
 		}
-    
     useObserver(lastElement, data, observCallback);
-
     useEffect(() => {
 			state.getData( page, setRespones);
     }, [page]);
@@ -31,7 +32,9 @@ const SectionMain:React.FC = () => {
 		useEffect(() => {
 			getPosts(posts, data)
 		}, [data]);
-  
+
+    const value = useSelector((state:any)=>state.postReducer.posts)
+    const dispatch= useDispatch()
   if (posts.length === 0) {
     return (
       <section className={classes.sectionMain}>
@@ -45,6 +48,10 @@ const SectionMain:React.FC = () => {
     return (
       <section className={classes.sectionMain}>
         <div className="container">
+          <button className={classes.btn} 
+          onClick={()=>dispatch(fetchPost(dispatch))}
+          >get Posts</button>
+        <span  onClick={()=>console.log(value)}> value:</span>
           <CardRow
             data={posts}
             likesRow={false}
