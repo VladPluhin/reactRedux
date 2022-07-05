@@ -3,38 +3,44 @@ import classes from "./sectionMain.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Spinner from "../Spiner/Spiner";
 import { useObserver } from "../hooks/useObserver";
-import State from "../state/state";
+// import State from "../state/state";
 
 import { useSelector , useDispatch} from "react-redux";
 import {fetchPost} from '../redux/action-creater';
 
 const SectionMain:React.FC = () => {
-		const state = new State();
+	
 		const lastElement =  React.createRef<HTMLDivElement>();
-    const [page, setPageRender] = useState(0);
-    const [data, setRespones] = useState(null);
+    const [page, setPageRender] = useState(1);
     const [posts, setPosts] = useState([]);
+    const dispatch= useDispatch();
+    const data = useSelector((state:any)=>state.postReducer.posts)
+
     let observCallback= ()=> {
       setPageRender(page + 1)
     } 
+    
     function getPosts(posts:Array<any>, data:any) {
-			let newArr: any = []
+      let newArr: any = []
+      console.log(posts)
 			if (data) {
-					newArr = [...posts, ...data?.response.results];
-					return setPosts(newArr);
+					newArr = [...posts, ...data];
+          return setPosts(newArr);
 				}
 		}
-    useObserver(lastElement, data, observCallback);
     useEffect(() => {
-			state.getData( page, setRespones);
+			dispatch(fetchPost(dispatch, page));
     }, [page]);
+
+
+    useObserver(lastElement, data, observCallback);
 
 		useEffect(() => {
 			getPosts(posts, data)
 		}, [data]);
 
-    const value = useSelector((state:any)=>state.postReducer.posts)
-    const dispatch= useDispatch()
+  
+   
   if (posts.length === 0) {
     return (
       <section className={classes.sectionMain}>
@@ -48,15 +54,11 @@ const SectionMain:React.FC = () => {
     return (
       <section className={classes.sectionMain}>
         <div className="container">
-          <button className={classes.btn} 
-          onClick={()=>dispatch(fetchPost(dispatch))}
-          >get Posts</button>
-        <span  onClick={()=>console.log(value)}> value:</span>
           <CardRow
             data={posts}
             likesRow={false}
           />
-          <div ref={lastElement} style={{ height: 1 }}></div>
+          <div ref={lastElement} style={{ height: 100 }}></div>
         </div>
       </section>
     );
