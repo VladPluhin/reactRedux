@@ -3,38 +3,38 @@ import classes from "./sectionMain.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Spinner from "../Spiner/Spiner";
 import { useObserver } from "../hooks/useObserver";
-// import State from "../state/state";
 
 import { useSelector , useDispatch} from "react-redux";
 import {fetchPost} from '../redux/action-creater';
 
 const SectionMain:React.FC = () => {
-	
 		const lastElement =  React.createRef<HTMLDivElement>();
     const [page, setPageRender] = useState(1);
     const [posts, setPosts] = useState([]);
     const dispatch= useDispatch();
     const data = useSelector((state:any)=>state.postReducer.posts)
 
-    let observCallback= ()=> {
+    function observCallback(){
       setPageRender(page + 1)
     } 
     
     function getPosts(posts:Array<any>, data:any) {
       let newArr: any = []
-      console.log(posts)
-			if (data) {
+			if (data && posts.length<=0) {
+        newArr = [...data];
+        return setPosts(newArr);
+      }
+      else {
 					newArr = [...posts, ...data];
           return setPosts(newArr);
 				}
 		}
+   
+    useObserver(lastElement, data, observCallback);
     useEffect(() => {
 			dispatch(fetchPost(dispatch, page));
     }, [page]);
-
-
-    useObserver(lastElement, data, observCallback);
-
+    
 		useEffect(() => {
 			getPosts(posts, data)
 		}, [data]);
@@ -55,8 +55,7 @@ const SectionMain:React.FC = () => {
       <section className={classes.sectionMain}>
         <div className="container">
           <CardRow
-            data={posts}
-            likesRow={false}
+            posts={posts}
           />
           <div ref={lastElement} style={{ height: 100 }}></div>
         </div>

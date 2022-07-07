@@ -9,13 +9,13 @@ import { AppContext } from "./components/context/context";
 import Layout from "./components/Layout/Layout";
 
 const App = () => {
-  const [likePostData, setLikedPost] = useState([]);
+  
   const [searchPosts, setSearchPosts] = useState([]);
   
   return (
     
     <AppContext.Provider value={{
-      likePostData, setLikedPost,
+    
       searchPosts, setSearchPosts}}> 
         <Routes>
           <Route path='/' element={<Layout/>}>

@@ -3,14 +3,18 @@ import classes from "./card.module.scss";
 import { AppContext } from "../context/context";
 import Popup from "../Popup/Popup";
 import { CSSTransition } from 'react-transition-group';
-
+import { useSelector , useDispatch} from "react-redux";
+import {  ACTIONS_LIST} from '../redux/postReducer'
 interface Card{
+  
   description: string;
   created_at: string;
   name: string;
+  id: string;
   user: {
     username: string
   }
+ 
   urls: {
     regular: string
   }
@@ -18,15 +22,16 @@ interface Card{
 
 interface CardProp {
   card: Card;
-  likesRow: boolean
+  likedData? : boolean
 
 }
 
-const Card:React.FC<CardProp>= ({card, likesRow}) => {
-  const { likePostData, setLikedPost } = useContext(AppContext);
+const Card:React.FC<CardProp>= ({card, likedData}) => {
   const [hovered, setHovered] = useState(false);
   const hoverOff = React.createRef<HTMLInputElement>();
   const hoverOn = React.createRef<HTMLInputElement>();
+  const dispatch= useDispatch();
+  const likedRow = useSelector((state:any)=>state.postReducer.likedRow)
   const gethoverOff=()=> {
     setHovered(false)
     return  ()=> {hoverOff.current!.removeEventListener("mouseleave", gethoverOff)}
@@ -37,39 +42,24 @@ const Card:React.FC<CardProp>= ({card, likesRow}) => {
     return  ()=> {hoverOn.current!.removeEventListener("mouseenter", gethoverOn)};
   }
 
-  function getLike  (card:any, arr:any)    {
-    let selectPhoto = card ;
-    let newArr = arr;
-    const even = (item:any) => item.id === selectPhoto.id;
-    if (newArr.length === 0) {
-      newArr.push(selectPhoto);
-      return newArr;
-    } else if (!newArr.some(even)) {
-      newArr.push(selectPhoto);
-      return newArr;
-    }
-    return newArr;
+function getLike(card:any)    {
+  dispatch({type: ACTIONS_LIST.LIKED_POST,  payload:[card]}); 
   };
-
-  function deletedPost  (card:any, arr:any)  {
-    var filtered = arr.filter(function (el:any) {
-      return el.id !== card.id;
-    });
-    return filtered;
+  
+  function deletedPost(card:any)  {
+    dispatch({type: ACTIONS_LIST.REMOVE_POST,  payload:[card.id]}); 
   };
-
-
   return (
     <div className={classes.card}  ref={hoverOff} onMouseLeave={gethoverOff}>
       <div className={classes.cardImg}>
         <img className="img" src={card.urls?.regular} alt={card.description? card.description: 'image descriptiom'}/>
       </div>
       <div className={classes.cardBody}>
-        { likesRow ?
-          <button className={classes.btnDelet} onClick={() => setLikedPost!(deletedPost( card, likePostData))}>
+        {likedData?
+          <button className={classes.btnDelet} onClick={() => deletedPost( card)}>
             &#9747;
           </button>
-         : <button className={classes.btnLike} onClick={() => setLikedPost!(getLike( card, likePostData))} >
+         : <button className={classes.btnLike} onClick={() =>  getLike( card)} >
             &#10084;
           </button>
         }

@@ -2,10 +2,11 @@ import React, { useContext} from "react";
 import classes from "./sectionSearch.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Filter from "../Filter/Filter";
-import { AppContext } from "../../components/context/context";
 
+import { useSelector } from "react-redux";
 const SectionSearch = () => {
-  const { searchPosts } = useContext(AppContext);
+  const searchPosts = useSelector((state:any)=>state.postReducer.posts)
+
   if (searchPosts!.length === 0) {
       return (
         <section className={classes.sectionSearch}>
@@ -21,8 +22,7 @@ const SectionSearch = () => {
           <div className="container">
             <Filter />
             <CardRow
-              data={searchPosts}
-              likesRow={false}
+              posts={searchPosts}
             />
           </div>
         </section>
