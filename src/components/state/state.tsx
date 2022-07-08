@@ -9,7 +9,6 @@ export default class  State {
   getSortedPostData(options:any, setSortedData:Function ) {
       return this.createApi.search.getPhotos(options)
         .then((result) => {
-          console.log(options)
            setSortedData(result.response!.results);
         })
         .catch(() => {

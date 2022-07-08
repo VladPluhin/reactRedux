@@ -4,7 +4,8 @@ import { CSSTransition } from "react-transition-group";
 import State from "../state/state";
 import BtnPrimary from  '../UI/BtnPrimary';
 import { AppContext } from "../../components/context/context";
-
+import {sortPost} from '../redux/action-creater'
+import { useSelector , useDispatch} from "react-redux";
 
 const Filter: React.FC = () => {
   const state = new State();
@@ -12,8 +13,12 @@ const Filter: React.FC = () => {
   const [showed, setShowedFilter] = useState(false);
   const { searchPosts, setSearchPosts } = useContext(AppContext);
   const [animateButton, setAnimateButton] = useState(false);
+
+
+  const dispatch= useDispatch();
+
   const [filter, setFilter]= useState({
-    query: 'space',
+    query: '',
     page: 1,
     perPage: 10,
     color: 'black',
@@ -32,10 +37,13 @@ const Filter: React.FC = () => {
   } 
   
   function getPosts() {
-    return state.getSortedPostData( filter, setSearchPosts!)
+    if(filter.query.length>0) {
+      dispatch(sortPost(dispatch, filter))
+    }
    } 
  
   const getShowedFilter = () => {
+    
       return showed ? setShowedFilter( false) : setShowedFilter(true);
   };
  
@@ -89,7 +97,8 @@ const Filter: React.FC = () => {
               <div className={classes.btnWrapper}>
                   <BtnPrimary
                    value={"Find Posts"}
-                    onHandleFunction =  {() => {getShowedFilter()
+                    onHandleFunction =  {() => {
+                      getShowedFilter()
                       getPosts()}}
                   type="sybmit"/>
                 <BtnPrimary

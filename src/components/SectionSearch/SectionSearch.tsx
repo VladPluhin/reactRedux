@@ -5,7 +5,7 @@ import Filter from "../Filter/Filter";
 
 import { useSelector } from "react-redux";
 const SectionSearch = () => {
-  const searchPosts = useSelector((state:any)=>state.postReducer.posts)
+  const searchPosts = useSelector((state:any)=>state.postReducer.searchedPosts)
 
   if (searchPosts!.length === 0) {
       return (
