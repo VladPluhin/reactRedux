@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import classes from "./card.module.scss";
-import { AppContext } from "../context/context";
 import Popup from "../Popup/Popup";
 import { CSSTransition } from 'react-transition-group';
-import { useSelector , useDispatch} from "react-redux";
-import {  ACTIONS_LIST} from '../redux/postReducer'
+import { useAppDispatch, useAppSelectore } from "../redux/hook";
+import{ postsLiked, postsRemoving, } from '../redux/postSlice'
 interface Card{
   
   description: string;
@@ -30,8 +29,7 @@ const Card:React.FC<CardProp>= ({card, likedData}) => {
   const [hovered, setHovered] = useState(false);
   const hoverOff = React.createRef<HTMLInputElement>();
   const hoverOn = React.createRef<HTMLInputElement>();
-  const dispatch= useDispatch();
-  const likedRow = useSelector((state:any)=>state.postReducer.likedRow)
+  const dispatch= useAppDispatch();
   const gethoverOff=()=> {
     setHovered(false)
     return  ()=> {hoverOff.current!.removeEventListener("mouseleave", gethoverOff)}
@@ -43,11 +41,11 @@ const Card:React.FC<CardProp>= ({card, likedData}) => {
   }
 
 function getLike(card:any)    {
-  dispatch({type: ACTIONS_LIST.LIKED_POST,  payload:[card]}); 
+  dispatch(postsLiked(card)); 
   };
   
   function deletedPost(card:any)  {
-    dispatch({type: ACTIONS_LIST.REMOVE_POST,  payload:[card.id]}); 
+    dispatch(postsRemoving(card.id)); 
   };
   return (
     <div className={classes.card}  ref={hoverOff} onMouseLeave={gethoverOff}>

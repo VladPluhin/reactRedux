@@ -1,21 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import classes from "./filter.module.scss";
 import { CSSTransition } from "react-transition-group";
 import State from "../state/state";
 import BtnPrimary from  '../UI/BtnPrimary';
-import { AppContext } from "../../components/context/context";
 import {sortPost} from '../redux/action-creater'
-import { useSelector , useDispatch} from "react-redux";
-
+import { useAppDispatch, useAppSelectore } from "../redux/hook";
 const Filter: React.FC = () => {
   const state = new State();
   const nodeRef = React.useRef(null)
   const [showed, setShowedFilter] = useState(false);
-  const { searchPosts, setSearchPosts } = useContext(AppContext);
   const [animateButton, setAnimateButton] = useState(false);
 
 
-  const dispatch= useDispatch();
+  const dispatch= useAppDispatch();
 
   const [filter, setFilter]= useState({
     query: '',

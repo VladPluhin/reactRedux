@@ -3,27 +3,28 @@ import classes from "./sectionMain.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Spinner from "../Spiner/Spiner";
 import { useObserver } from "../hooks/useObserver";
-
-import { useSelector , useDispatch} from "react-redux";
 import {fetchPost} from '../redux/action-creater';
+import { useAppDispatch, useAppSelectore } from "../redux/hook";
 
 const SectionMain:React.FC = () => {
 		const lastElement =  React.createRef<HTMLDivElement>();
     const [page, setPageRender] = useState(1);
     const [posts, setPosts] = useState([]);
-    const dispatch= useDispatch();
-    const data = useSelector((state:any)=>state.postReducer.posts)
-
+    const dispatch= useAppDispatch();
+    const data = useAppSelectore((state)=>state.postsReducer.posts)
+    
     function observCallback(){
       setPageRender(page + 1)
     } 
     
     function getPosts(posts:Array<any>, data:any) {
       let newArr: any = []
+      
 			if (data && posts.length<=0) {
         newArr = [...data];
         return setPosts(newArr);
       }
+      
       else {
 					newArr = [...posts, ...data];
           return setPosts(newArr);
@@ -31,6 +32,7 @@ const SectionMain:React.FC = () => {
 		}
    
     useObserver(lastElement, data, observCallback);
+    
     useEffect(() => {
 			dispatch(fetchPost(dispatch, page));
     }, [page]);
@@ -39,8 +41,6 @@ const SectionMain:React.FC = () => {
 			getPosts(posts, data)
 		}, [data]);
 
-  
-   
   if (posts.length === 0) {
     return (
       <section className={classes.sectionMain}>

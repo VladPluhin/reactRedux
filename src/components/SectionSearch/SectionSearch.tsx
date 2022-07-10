@@ -1,11 +1,10 @@
-import React, { useContext} from "react";
 import classes from "./sectionSearch.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Filter from "../Filter/Filter";
 
-import { useSelector } from "react-redux";
+import {  useAppSelectore } from "../redux/hook";
 const SectionSearch = () => {
-  const searchPosts = useSelector((state:any)=>state.postReducer.searchedPosts)
+  const searchPosts = useAppSelectore((state:any)=>state.postsReducer.searchedPosts)
 
   if (searchPosts!.length === 0) {
       return (

@@ -1,10 +1,11 @@
 import React from "react";
 import classes from "./sectionLikedPost.module.scss";
 import CardRow from "../CardRow/CardRow";
-import { useSelector } from "react-redux";
+import { useAppSelectore } from "../redux/hook";
+
 const SectionLikedPost = () => {
-  const likesPost = useSelector((state:any)=>state.postReducer.likedPosts);
-  const likedRow = useSelector((state:any)=>state.postReducer.likedPosts)
+  const likesPost = useAppSelectore((state:any)=>state.postsReducer.likedPosts);
+  const likedRow = useAppSelectore((state:any)=>state.postsReducer.likedPosts)
   
   if (likesPost.length === 0) {
     return (

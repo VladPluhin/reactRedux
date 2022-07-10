@@ -1,9 +1,13 @@
-import { postReducer } from "./postReducer";
-import { configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import { configureStore} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import {fetchPost, sortPost} from './action-creater'
+import postsReducer from './postSlice';
 
-export const store = configureStore({
-    reducer: {postReducer},
+const store = configureStore({
+    reducer: {postsReducer},
     middleware: [thunk],
 })
+
+export  default store;
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch= typeof store.dispatch
