@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import classes from "./cardRow.module.scss";
+import styles from "../../styles/cardRow.module.scss";
 import Card from "../Card/Card";
 import Masonry from 'react-masonry-css';
 
@@ -10,7 +10,7 @@ interface CardRowProps {
 const CardRow = ({posts, likedData}: CardRowProps) => {
  
     return (
-      <div className={classes.cardRow}>
+      <div className={styles.cardRow}>
           <Masonry
               breakpointCols={3}
               className="my-masonry-grid"

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./ui.module.scss";
+import styles  from "../../styles/ui.module.scss";
 
 interface BtnPrimaryProps {
   value?: string;
@@ -13,11 +13,11 @@ const BtnPrimary:React.FC<BtnPrimaryProps> = ({value, href, onHandleFunction}) =
   const linkHref = href ? href : '';
   if(linkHref) {
     return(
-      <a className={classes.BtnPrimary} href={linkHref} onClick={onHandleFunction}>{btnValue}</a>
+      <a className={styles.BtnPrimary} href={linkHref} onClick={onHandleFunction}>{btnValue}</a>
     )
   }else {
     return(
-      <button className={classes.BtnPrimary} onClick={onHandleFunction}>{btnValue}</button>
+      <button className={styles.BtnPrimary} onClick={onHandleFunction}>{btnValue}</button>
     )
   }
   

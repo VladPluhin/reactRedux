@@ -1,6 +1,5 @@
 import React from "react";
-import classes from "./popup.module.scss";
-import  "./popup.module.scss";
+import styles  from "../../styles/popup.module.scss";
 
 interface PopupProps {
   user:any;
@@ -8,23 +7,23 @@ interface PopupProps {
 
 const Popup = ({user}:PopupProps) => {
   return(
-      <div className={classes.popup}>
-        <div className={classes.infoWrapper}>
-            <div className={classes.popupLogo}>
+      <div className={styles.popup}>
+        <div className={styles.infoWrapper}>
+            <div className={styles.popupLogo}>
               <img src={user.profile_image.medium} alt={user.first_name} />
             </div>
-            <div className={classes.popupDescription}>
-                <h4 className={classes.name}>
+            <div className={styles.popupDescription}>
+                <h4 className={styles.name}>
                   {user.first_name}
                   {user.last_name ?
-                    <span className={classes.lastName}>
+                    <span className={styles.lastName}>
                     {user.last_name}</span>:
                   ''}
                 </h4>
             </div>
         </div>
-        <div className={classes.btnWrapper}>
-            <a href={user.links.self} className={classes.btnView}> View Portfolio</a>
+        <div className={styles.btnWrapper}>
+            <a href={user.links.self} className={styles.btnView}> View Portfolio</a>
         </div>
       </div >
   )

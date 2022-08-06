@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./pagination.module.scss";
+import styles  from "../../styles/pagination.module.scss";
 
 
 interface PaginationProps {
@@ -29,7 +29,7 @@ const Pagination:React.FC<PaginationProps> = ({curentPage, totalItem, itemAmount
   };
 
   return (
-    <ul className={classes.pagination}>
+    <ul className={styles.pagination}>
       <li>
         <span
           role="button"

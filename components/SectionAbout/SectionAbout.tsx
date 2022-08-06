@@ -1,11 +1,11 @@
 import React from "react";
-import classes from "./sectionAbout.module.scss";
+import styles  from "../../styles/sectionAbout.module.scss";
 
 const SectionAbout = () => {
   return (
-    <section className={classes.sectionAbout}>
+    <section className={styles.sectionAbout}>
       <div className="container">
-        <div className={classes.text}>
+        <div className={styles.text}>
           <h1>About</h1>
           <p>
             Unsplash was born from the pain we had in finding great, usable

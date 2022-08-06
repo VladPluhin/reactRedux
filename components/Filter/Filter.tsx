@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./filter.module.scss";
+import styles  from "../../styles/filter.module.scss";
 import { CSSTransition } from "react-transition-group";
 import State from "../state/state";
 import BtnPrimary from  '../UI/BtnPrimary';
@@ -66,37 +66,37 @@ const Filter: React.FC = () => {
         unmountOnExit
         onEnter={() => setAnimateButton(true)}
         onExited={() => setAnimateButton(false)}>
-        <div className={classes.sortingHolder} >
-          <div className={classes.container}>
-            <div className={classes.scrollwrapper}>
-              <h4 className={classes.title}> Search posts</h4>
-              <input type="text"  className={classes.search} placeholder="lets find posts.." onChange={(event)=>{getFilterValue('query', event.target.value)}} />
+        <div className={styles.sortingHolder} >
+          <div className={styles.container}>
+            <div className={styles.scrollwrapper}>
+              <h4 className={styles.title}> Search posts</h4>
+              <input type="text"  className={styles.search} placeholder="lets find posts.." onChange={(event)=>{getFilterValue('query', event.target.value)}} />
               <span className="validation">Please, write topic for search</span>
-              <div className={classes.orientation}>
-                <h4 className={classes.title}> Posts orientation</h4>
-                <select className={classes.select} onChange={(event)=>{getFilterValue('orientation', event.target.value)}}>
+              <div className={styles.orientation}>
+                <h4 className={styles.title}> Posts orientation</h4>
+                <select className={styles.select} onChange={(event)=>{getFilterValue('orientation', event.target.value)}}>
                     {state.filterOptions.orientation.map((item)=>{
                       return <option value={item} key={item}>{item}</option>
                   })}
                 </select>
               </div>
-              <div className={classes.count}>
-                <h4 className={classes.title}>Count posts</h4>
-                <select className={classes.select}  onChange={(event) => {getFilterValue('perPage', event.target.value)}}>
+              <div className={styles.count}>
+                <h4 className={styles.title}>Count posts</h4>
+                <select className={styles.select}  onChange={(event) => {getFilterValue('perPage', event.target.value)}}>
                     {state.filterOptions.postsCounter.map((item)=>{
                       return <option value={item} key={item}>{item}</option>
                   })}
                 </select>
               </div>
-              <div className={classes.colors}>
-                <h4 className={classes.title}> Posts colors</h4>
-                <select className={classes.select}  onChange={(event)=>{getFilterValue('color', event.target.value)}}>
+              <div className={styles.colors}>
+                <h4 className={styles.title}> Posts colors</h4>
+                <select className={styles.select}  onChange={(event)=>{getFilterValue('color', event.target.value)}}>
                     {state.filterOptions.colors.map((item)=>{
                       return <option value={item} key={item}>{item}</option>
                   })}
                 </select>
               </div>
-              <div className={classes.btnWrapper}>
+              <div className={styles.btnWrapper}>
                   <BtnPrimary
                    value={"Find Posts"}
                     onHandleFunction =  {() => {

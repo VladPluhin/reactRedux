@@ -5,7 +5,7 @@ import { AppDispatch } from "./store";
 const Api= createApi({accessKey: "k6MK8xSwdSo_9QcKO4iLm0r_nirfy7FUADRtpAMqhRw"});
 
 export const fetchPost = (dispatch:AppDispatch, pages:number, ) :any=> {
-  dispatch(postsSlice.actions.postIsLoading(true))  
+  dispatch(postsSlice.actions.postIsLoading())  
   return function()  {
       return Api.photos
       .list({
@@ -21,7 +21,7 @@ export const fetchPost = (dispatch:AppDispatch, pages:number, ) :any=> {
 }
 
 export const sortPost = (dispatch:AppDispatch, filter:any) :any=> {
-  dispatch(postsSlice.actions.postIsLoading(true))  
+  dispatch(postsSlice.actions.postIsLoading())  
   return function()  {
     return Api.search.getPhotos(filter)
     .then((result:any) => {

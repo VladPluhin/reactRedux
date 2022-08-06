@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./sectionLikedPost.module.scss";
+import styles  from "../../styles/sectionLikedPost.module.scss";
 import CardRow from "../CardRow/CardRow";
 import { useAppSelectore } from "../redux/hook";
 
@@ -9,7 +9,7 @@ const SectionLikedPost = () => {
   
   if (likesPost.length === 0) {
     return (
-      <section className={classes.sectionLiked}>
+      <section className={styles.sectionLiked}>
         <div className="container">
            <h1>No posts chosen...</h1>
         </div>
@@ -17,7 +17,7 @@ const SectionLikedPost = () => {
     )
   }else  {
    return (
-      <section className={classes.sectionLiked}>
+      <section className={styles.sectionLiked}>
         <div className="container">
           <CardRow posts= {likesPost} likedData={likedRow}/>
         </div>

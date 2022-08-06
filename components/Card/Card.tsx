@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import classes from "./card.module.scss";
+import styles  from "../../styles/card.module.scss";
 import Popup from "../Popup/Popup";
 import { CSSTransition } from 'react-transition-group';
 import { useAppDispatch, useAppSelectore } from "../redux/hook";
@@ -48,26 +48,26 @@ function getLike(card:any)    {
     dispatch(postsRemoving(card.id)); 
   };
   return (
-    <div className={classes.card}  ref={hoverOff} onMouseLeave={gethoverOff}>
-      <div className={classes.cardImg}>
+    <div className={styles.card}  ref={hoverOff} onMouseLeave={gethoverOff}>
+      <div className={styles.cardImg}>
         <img className="img" src={card.urls?.regular} alt={card.description? card.description: 'image descriptiom'}/>
       </div>
-      <div className={classes.cardBody}>
+      <div className={styles.cardBody}>
         {likedData?
-          <button className={classes.btnDelet} onClick={() => deletedPost( card)}>
+          <button className={styles.btnDelet} onClick={() => deletedPost( card)}>
             &#9747;
           </button>
-         : <button className={classes.btnLike} onClick={() =>  getLike( card)} >
+         : <button className={styles.btnLike} onClick={() =>  getLike( card)} >
             &#10084;
           </button>
         }
-        <time className={classes.date} dateTime={ card.created_at ?  card.created_at.slice(0, 10) : ""}>
+        <time className={styles.date} dateTime={ card.created_at ?  card.created_at.slice(0, 10) : ""}>
           { card.created_at ?  card.created_at.slice(0, 10) : ""}
         </time>
-        <div className={classes.description}>
+        <div className={styles.description}>
           { card.description ? <p> { card.description} </p> : " "}
         </div>
-        <span className={classes.title}  ref={ hoverOn} onMouseOver={gethoverOn}>
+        <span className={styles.title}  ref={ hoverOn} onMouseOver={gethoverOn}>
           <span>Author:</span>
           {card.name ? card.name : card.user.username}
         </span>

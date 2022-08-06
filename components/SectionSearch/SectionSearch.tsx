@@ -1,4 +1,4 @@
-import classes from "./sectionSearch.module.scss";
+import styles  from "../../styles/sectionSearch.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Filter from "../Filter/Filter";
 import Spinner from "../Spiner/Spiner";
@@ -10,7 +10,7 @@ const SectionSearch = () => {
   
   if (searchPosts!.length === 0) {
       return (
-        <section className={classes.sectionSearch}>
+        <section className={styles.sectionSearch}>
           <div className="container">
             <h2>Let`s find posts...</h2>
             <Filter />
@@ -19,7 +19,7 @@ const SectionSearch = () => {
       );
     } else if( searchPosts!.length === 0 && isLoading){
         return (
-          <section className={classes.sectionSearch}>
+          <section className={styles.sectionSearch}>
             <div className="container">
               <Spinner />
             </div>
@@ -27,7 +27,7 @@ const SectionSearch = () => {
         );
       } else {
       return (
-        <section className={classes.sectionSearch}>
+        <section className={styles.sectionSearch}>
           <div className="container">
             <Filter />
             <CardRow

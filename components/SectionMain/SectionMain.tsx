@@ -1,5 +1,5 @@
 import React, { useEffect , useState} from "react";
-import classes from "./sectionMain.module.scss";
+import styles  from "../../styles/sectionMain.module.scss";
 import CardRow from "../CardRow/CardRow";
 import Spinner from "../Spiner/Spiner";
 import { useObserver } from "../hooks/useObserver";
@@ -43,7 +43,7 @@ const SectionMain:React.FC = () => {
 
   if (isLoading) {
     return (
-      <section className={classes.sectionMain}>
+      <section className={styles.sectionMain}>
         <div className="container">
           <Spinner />
           <div ref={lastElement} style={{ height: 1 }}></div>
@@ -52,7 +52,7 @@ const SectionMain:React.FC = () => {
     );
   } else{
     return (
-      <section className={classes.sectionMain}>
+      <section className={styles.sectionMain}>
         <div className="container">
           <CardRow
             posts={posts}/>
