@@ -20,7 +20,7 @@
 		text-shadow: 1px 1px 1px #302b31;
 		display: inline-block;
 		text-decoration: none;
-		font-weight: 600;
+		font-weight:400;
 		cursor: pointer;
 		padding-bottom: 4px;
 		border-bottom: 2px solid transparent;
@@ -42,7 +42,7 @@
 	}
 }
 .account {
-margin-left: auto;
+	margin-left: auto;
 	a {
 		color: #fff!important;
 		display: inline-block;
@@ -101,6 +101,7 @@ li.hover {
         font-size: 20px;
         text-decoration: none;
         font-weight: 600;
+		font-family: 'Poppins', sans-serif;
         color: #fff;
     }
 }

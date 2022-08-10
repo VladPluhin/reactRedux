@@ -5,7 +5,9 @@ import {createSlice} from '@reduxjs/toolkit'
     likedPosts: any[],
     searchedPosts: any[],
     loading?: boolean,
-    likedRow: boolean
+    likedRow: boolean, 
+    userData: any[],
+    login: boolean
 }
 
 const initialState: PostState = {
@@ -13,7 +15,9 @@ const initialState: PostState = {
     likedPosts:[],
     searchedPosts:[],
     loading: false,
-    likedRow: false
+    likedRow: false,
+    userData: [],
+    login: false
 }
 
 export const postsSlice = createSlice({
@@ -39,6 +43,14 @@ export const postsSlice = createSlice({
         postsSearching(state, action:any) {
             state.searchedPosts = action.payload;
             state.loading = false;
+        }, 
+        getLogin(state, action:any) {
+            state.userData = action.payload;
+            state.login = true;
+        }, 
+        getLogOut(state) {
+            state.userData = [];
+            state.login = fales;
         }, 
         
     }

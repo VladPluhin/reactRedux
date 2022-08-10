@@ -1,7 +1,7 @@
 import React ,{useEffect} from "react";
 import styles  from "../../styles/nav.module.scss";
 import Link from 'next/link'
-
+import User from '../user/user'
 
 const Nav = () => {
   let start:any;
@@ -40,11 +40,6 @@ const Nav = () => {
           </div>
           <ul className={styles.navLists} >
               <li>
-                <Link  href="/liked-posts">  
-                  <a>Liked Posts<span className ={styles.iconsheart}> &#10084; </span></a>
-                </Link>
-              </li>
-              <li>
                 <Link  href="/search"> 
                   <a>Lets Find  <span className={styles.iconSearch}> &#9906;</span></a>
                 </Link>
@@ -54,11 +49,8 @@ const Nav = () => {
                     <a>about</a>
                 </Link>
               </li>
-             
           </ul>
-          <div className={styles.account}>
-            <Link href="/" ><a>account</a></Link>
-          </div>
+         <User/>
         </div >
       </nav>
    </header>

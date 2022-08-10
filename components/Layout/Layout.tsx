@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
 
-const MainLayout:React.FC = ({children})=>{
+const MainLayout = ({children}:{children: any})=>{
   return (
     <>
       <Nav/>
