@@ -1,7 +1,7 @@
 import { createApi } from "unsplash-js";
-
+import {initializeApp} from '@firebase/app';
+import { getFirestore } from "@firebase/firestore";
 export default class  State {
-   
   createApi = createApi({
       accessKey: "k6MK8xSwdSo_9QcKO4iLm0r_nirfy7FUADRtpAMqhRw",
   });
@@ -37,3 +37,6 @@ export default class  State {
       measurementId: "G-BPDQ74YX9B"
   }
 }
+export const state = new State();
+export const app = initializeApp(state.firebaseOptions);
+export const db = getFirestore(app);

@@ -1,36 +1,33 @@
-import React, { useState} from "react";
+import React from "react";
 import styles  from "../../styles/user.module.scss";
 import { useAppDispatch, useAppSelectore } from "../redux/hook";
-import {initializeApp} from '@firebase/app';
 import { getAuth, GoogleAuthProvider , signOut} from "firebase/auth";
-import State from "../state/state";
+import {app, db}  from "../state/state";
 import {setLogin} from '../redux/action-creater';
 import Link from 'next/link'
 import { postsSlice } from "../redux/postSlice";
+
 const User = () => {
-  const state = new State();
-  const dispatch= useAppDispatch();
-  const userData = useAppSelectore((state)=>state.postsReducer.userData);
-  const isLogin = useAppSelectore((state)=>state.postsReducer.login)
+  const dispatch = useAppDispatch();
+  let userData:any = useAppSelectore((state) => state.postsReducer.userData);
+  const isLogin = useAppSelectore((state) => state.postsReducer.login)
   const provider = new GoogleAuthProvider(); 
-  const app = initializeApp(state.firebaseOptions);
   const auth = getAuth(app);
 
-  const getLogin = async (event:any) => {
+  const getLogin =  (event:any) => {
     event.preventDefault();
-    dispatch(setLogin(dispatch,auth, provider))
+    dispatch(setLogin(dispatch, auth, provider));
   }
-
+ 
   const  getLogOut = (event:any)=> {
-    event.preventDefault();
-    signOut(auth).then(() => {
-    return dispatch(postsSlice.actions.getLogOut())
-
+    event.preventDefault()
+    return signOut(auth).then(() => {
+      return dispatch(postsSlice.actions.getLogOut())
     }).catch((error) => {
       console.log(error)
     });
-    
   }
+
   if (!isLogin) {
     return (
     <div className={styles.account}>
@@ -58,6 +55,5 @@ const User = () => {
       </div>
     );
   }
- 
 };
 export default User;

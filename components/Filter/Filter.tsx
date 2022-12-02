@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styles  from "../../styles/filter.module.scss";
 import { CSSTransition } from "react-transition-group";
-import State from "../state/state";
+import {state} from "../state/state";
 import BtnPrimary from  '../UI/BtnPrimary';
 import {sortPost} from '../redux/action-creater'
 import { useAppDispatch, useAppSelectore } from "../redux/hook";
 
 const Filter: React.FC = () => {
-  const state = new State();
+ 
   const nodeRef = React.useRef(null)
   const [showed, setShowedFilter] = useState(false);
   const [animateButton, setAnimateButton] = useState(false);

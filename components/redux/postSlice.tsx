@@ -1,12 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit'
-
+interface User {
+    photoURL: string,
+    displayName: string
+}
  export interface PostState {
     posts: any[],
     likedPosts: any[],
     searchedPosts: any[],
     loading?: boolean,
     likedRow: boolean, 
-    userData: any[],
+    userData: User,
     login: boolean
 }
 
@@ -16,7 +19,10 @@ const initialState: PostState = {
     searchedPosts:[],
     loading: false,
     likedRow: false,
-    userData: [],
+    userData: {
+        photoURL:'',
+        displayName: ''
+    },
     login: false
 }
 
@@ -47,10 +53,15 @@ export const postsSlice = createSlice({
         getLogin(state, action:any) {
             state.userData = action.payload;
             state.login = true;
+            state.likedRow = true;
         }, 
         getLogOut(state) {
-            state.userData = [];
-            state.login = fales;
+            state.userData =  {
+                photoURL:'',
+                displayName: ''
+            };
+            state.login = false;
+            state.likedRow = false;
         }, 
         
     }

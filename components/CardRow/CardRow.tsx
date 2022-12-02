@@ -5,11 +5,10 @@ import Masonry from 'react-masonry-css';
 
 interface CardRowProps {
   posts?: any[];
-  likedData?: boolean;
+
 }
-const CardRow = ({posts, likedData}: CardRowProps) => {
- 
-    return (
+const CardRow = ({posts}: CardRowProps) => {
+  return (
       <div className={styles.cardRow}>
           <Masonry
               breakpointCols={3}
@@ -17,7 +16,7 @@ const CardRow = ({posts, likedData}: CardRowProps) => {
               columnClassName="my-masonry-grid_column">
               {posts?.map((card, id) => (
                   <div key={card.id +   id}>
-                      <Card  card={card} likedData={likedData}/>
+                      <Card  card={card} />
                   </div>
               ))}
          </Masonry>
